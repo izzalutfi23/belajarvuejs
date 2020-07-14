@@ -25,6 +25,9 @@
           <li class="nav-item">
             <router-link :to="{name: 'profil'}" class="nav-link">Profil</router-link>
           </li>
+          <li class="nav-item">
+            <router-link :to="{name: 'covid19'}" class="nav-link">Data Covid-19</router-link>
+          </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input
