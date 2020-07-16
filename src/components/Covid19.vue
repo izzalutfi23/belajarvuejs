@@ -21,6 +21,8 @@
         </tr>
       </tbody>
     </table>
+    <p>{{ label }}</p>
+    <pie-chart :data="[['Blueberry', 44], ['Strawberry', 23]]"></pie-chart>
   </div>
 </template>
 
@@ -28,7 +30,9 @@
 export default {
   data() {
     return {
-      list: []
+      list: [],
+      label: [],
+      dt: []
     };
   },
   created() {
@@ -37,6 +41,16 @@ export default {
       .get(uri)
       .then(response => {
         this.list = response.data.data;
+      })
+      .catch(err => alert(err));
+
+    let url = "http://localhost:8000/api/chartdata";
+    this.axios
+      .get(url)
+      .then(response => {
+        this.dt = response.data.data;
+        this.positif = response.data.data.map(download => download.Positif);
+        this.label = response.data.data.map(downloa => downloa.provinsi);
       })
       .catch(err => alert(err));
   }
