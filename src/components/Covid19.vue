@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr v-for="(item, index) in list" :key="item.fid">
-          <td>{{ index + 1 }}</td>
+          <td>{{ index + 1}}</td>
           <td>{{ item.provinsi }}</td>
           <td>{{ item.kasusPosi }}</td>
           <td>{{ item.kasusSemb }}</td>
@@ -21,18 +21,19 @@
         </tr>
       </tbody>
     </table>
-    <p>{{ label }}</p>
-    <pie-chart :data="[['Blueberry', 44], ['Strawberry', 23]]"></pie-chart>
+    <LineChart style="width: 100%;"></LineChart>
   </div>
 </template>
 
 <script>
+import LineChart from "./Linechart";
 export default {
+  components: {
+    LineChart
+  },
   data() {
     return {
-      list: [],
-      label: [],
-      dt: []
+      list: []
     };
   },
   created() {
@@ -41,16 +42,6 @@ export default {
       .get(uri)
       .then(response => {
         this.list = response.data.data;
-      })
-      .catch(err => alert(err));
-
-    let url = "http://localhost:8000/api/chartdata";
-    this.axios
-      .get(url)
-      .then(response => {
-        this.dt = response.data.data;
-        this.positif = response.data.data.map(download => download.Positif);
-        this.label = response.data.data.map(downloa => downloa.provinsi);
       })
       .catch(err => alert(err));
   }
